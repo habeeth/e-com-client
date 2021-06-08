@@ -42,6 +42,12 @@ export default (state = initState, action) => {
                 authenticating: false,
             }
             break;
+        case authConstants.LOGOUT_REQUEST:
+            console.log('auth.reducer.js', 'LOGOUT_REQUEST')
+            state = {
+                ...initState
+            };
+            break;
         default:
             console.log('auth.reducer.js default break');
             break;

@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 
 const Input = (props) => {
     return (
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group> {/* removing formController to avoid getting non-unique id warnings in UI */}
             <Form.Label>{props.label}</Form.Label>
             <Form.Control
                 type={props.label}
