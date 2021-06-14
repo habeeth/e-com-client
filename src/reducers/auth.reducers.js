@@ -11,7 +11,10 @@ const initState = {
         picture: ''
     },
     authenticate: false,
-    authenticating: false
+    authenticating: false,
+    error: null,
+    message: '',
+    loading: false
 }
 export default (state = initState, action) => {
     console.log("auth.reducer.js begin", state, action);
@@ -45,12 +48,27 @@ export default (state = initState, action) => {
         case authConstants.LOGOUT_REQUEST:
             console.log('auth.reducer.js', 'LOGOUT_REQUEST')
             state = {
+                ...state,
+                loading: true
+            };
+            break;
+        case authConstants.LOGOUT_SUCCESS:
+            console.log('auth.reducer.js', 'LOGOUT_SUCCESS')
+            state = {
                 ...initState
             };
             break;
-        default:
-            console.log('auth.reducer.js default break');
+        case authConstants.LOGOUT_FAILURE:
+            console.log('auth.reducer.js', 'LOGOUT_FAILURE')
+            state = {
+                ...state,
+                loading: false,
+                error: action.payload.error
+            };
             break;
+        // default:
+        //     console.log('auth.reducer.js default break');
+        //     break;
     }
     console.log("auth.reducer.js endss", state, action);
     return state;

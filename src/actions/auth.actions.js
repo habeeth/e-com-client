@@ -28,7 +28,7 @@ export const login = (user) => {
                 dispatch({
                     type: authConstants.LOGIN_FAILURE,
                     payload: {
-                        error: res.data.message
+                        error: res.data.error || res.data.message
                     }
                 })
             }
@@ -68,9 +68,24 @@ export const isUserLoggedIn = () => {
 
 export const signout = () => {
     return async dispatch => {
-        localStorage.clear();
-        dispatch({
-            type: authConstants.LOGOUT_REQUEST
-        })
+        dispatch({ type: authConstants.LOGOUT_REQUEST });
+        const resp = await axios.post('/admin/signout');
+        console.log("auth.actions.js", resp.status);
+        if (resp.status === 200) {
+            localStorage.clear();
+            dispatch({
+                type: authConstants.LOGOUT_SUCCESS,
+                payload: {
+                    message: resp.data.message
+                }
+            })
+        } else {
+            dispatch({
+                type: authConstants.LOGOUT_FAILURE,
+                payload: {
+                    error: resp.data.error
+                }
+            })
+        }
     }
 }

@@ -32,9 +32,9 @@ export default function (state = initialState, action) {
                 loading: false
             }
             break;
-        default:
-            console.log("user.reducer.js", 'default');
-            break;
+        // default:
+        //     console.log("user.reducer.js", 'default');
+        //     break;
     }
     console.log("user.reducer.js", 'state', state);
     return state;
