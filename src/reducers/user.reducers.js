@@ -4,7 +4,7 @@ import { userConstants } from "../actions/constants"
 const initialState = {
     message: '', error: '', loading: false
 }
-export default function (state = initialState, action) {
+export default (state = initialState, action)=> {
     switch (action.type) {
         case userConstants.USER_REGISTER_REQUEST:
             console.log('user.reducer.js', 'USER_REGISTER_REQUEST');

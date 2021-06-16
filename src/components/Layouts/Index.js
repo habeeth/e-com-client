@@ -20,11 +20,12 @@ const Layout = (props) => {
                 <ul>
                   <li><NavLink exact to={`/`}>Home</NavLink></li>
                   <li><NavLink to={`/products`}>Products</NavLink></li>
+                  <li><NavLink to={`/category`}>Categories</NavLink></li>
                   <li><NavLink to={`/orders`}>Orders</NavLink></li>
                 </ul>
               </Col>
-              <Col md={8} style={{ marginLeft: 'auto' }}></Col>
-              <Col md={2} style={{ marginLeft: 'auto' }}>Ad</Col>
+              <Col md={10} style={{ marginLeft: 'auto' }}>{props.children}</Col>
+              {/* <Col md={2} style={{ marginLeft: 'auto' }}>Ad</Col> */}
             </Row>
           </Container>
           : props.children

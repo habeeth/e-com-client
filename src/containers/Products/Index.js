@@ -9,7 +9,7 @@ import Layout from '../../components/Layouts/Index';
 const Products = (props) => {
     return (
         <Layout sidebar>
-            
+            Products
         </Layout>
     )
 
