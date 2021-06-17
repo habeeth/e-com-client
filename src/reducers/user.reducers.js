@@ -36,6 +36,6 @@ export default (state = initialState, action)=> {
         //     console.log("user.reducer.js", 'default');
         //     break;
     }
-    console.log("user.reducer.js", 'state', state);
+    // console.log("user.reducer.js", 'state', state);
     return state;
 }

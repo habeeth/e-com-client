@@ -24,16 +24,21 @@ const Category = (props) => {
     }, [])
 
     const handleClose = () => {
-        const form = new FormData();
-        // const newCategory = {
-        //     categoryName,
-        //     parentCategoryId,
-        //     categoryImage
-        // }
-        form.append('name', categoryName);
-        form.append('parentId', parentCategoryId);
-        form.append('catPictures', categoryImage);
-        dispatch(createCategory(form));
+        // console.log('categoryName', categoryName);
+        // console.log('parentCategoryId', parentCategoryId);
+        if (categoryName != '' && parentCategoryId != '') {
+            const form = new FormData();
+            // const newCategory = {
+            //     categoryName,
+            //     parentCategoryId,
+            //     categoryImage
+            // }
+            form.append('name', categoryName);
+            form.append('parentId', parentCategoryId);
+            form.append('catPictures', categoryImage);
+            dispatch(createCategory(form));
+        }
+
         setShow(false);
         // console.log("cat.js", newCategory);
     }
@@ -45,7 +50,7 @@ const Category = (props) => {
 
     const renderCategories = (categories) => {
         let myCats = [];
-        console.log("typeof categories", typeof categories);
+        // console.log("typeof categories", typeof categories);
         for (let cat of categories) {
             myCats.push(
                 <li key={cat.name}>
@@ -57,18 +62,18 @@ const Category = (props) => {
         return myCats;
     }
 
-    const linearCategories = (categories, options = []) => {
-        console.log("categories", categories);
+    const linearCategoriesList = (categories, options = []) => {
+        // console.log("categories", categories);
 
         for (let cat of categories) {
-            console.log("cat", cat);
+            // console.log("cat", cat);
             options.push(
                 {
                     value: cat._id,
                     name: cat.name
                 });
             if (cat.children.length > 0) {
-                linearCategories(cat.children, options);
+                linearCategoriesList(cat.children, options);
             }
         }
         return options;
@@ -82,7 +87,7 @@ const Category = (props) => {
                 <Row>
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Categry</h3>
+                            <h3>Category</h3>
                             <Button variant='info' onClick={handleShow}>Add</Button>
                         </div>
                     </Col>
@@ -111,7 +116,7 @@ const Category = (props) => {
                         <select className='form-control' onChange={e => setParentCategoryId(e.target.value)}>
                             <option>--- SELECT ---</option>
                             {
-                                linearCategories(category.categories).map(m =>
+                                linearCategoriesList(category.categories).map(m =>
                                     <option key={m.value} value={m.value} >{m.name}</option>
                                 )
                             }

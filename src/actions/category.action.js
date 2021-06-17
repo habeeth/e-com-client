@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import axiosInstance from "../helpers/axios";
 import { categoryConstants } from "./constants";
 
@@ -31,7 +30,8 @@ export const createCategory = (formData) => {
         const res = await axiosInstance.post(`/category/create`, formData);
         if (res.status === 200) {
             console.log('category.action.js', 'ADD_CATEGORY_SUCCESS');
-            dispatch({ type: categoryConstants.ADD_CATEGORY_SUCCESS, payload: { data: res.data } })
+            dispatch({ type: categoryConstants.ADD_CATEGORY_SUCCESS, payload: { category: res.data.data } });
+
         }
         else {
             const error = res.data.error;

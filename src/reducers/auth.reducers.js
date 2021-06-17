@@ -17,7 +17,7 @@ const initState = {
     loading: false
 }
 export default (state = initState, action) => {
-    console.log("auth.reducer.js begin", state, action);
+    // console.log("auth.reducer.js begin", state, action);
     switch (action.type) {
         case authConstants.LOGIN_REQUEST:
             console.log('auth.reducer.js', 'LOGIN_REQUEST')
@@ -70,6 +70,6 @@ export default (state = initState, action) => {
         //     console.log('auth.reducer.js default break');
         //     break;
     }
-    console.log("auth.reducer.js endss", state, action);
+    // console.log("auth.reducer.js endss", state, action);
     return state;
 }
