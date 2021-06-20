@@ -40,7 +40,7 @@ const Header = (props) => {
 
   }
   return (
-    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ zIndex: 1 }}>
+    <Navbar collapseOnSelect fixed="top" expand="lg" bg="primary" variant="dark" style={{ zIndex: 1 }}>
       <Container fluid>
         {/* <Navbar.Brand href="#home">E-com Admin Dashboard</Navbar.Brand> */}
         <Link to="/" className="navbar-brand">E-com Admin Dashboard</Link>

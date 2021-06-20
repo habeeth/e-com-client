@@ -2,7 +2,7 @@ import { productConstants } from "../actions/constants"
 
 const initialState = {
     loading: false,
-    product: '',
+    products: [],
     error: ''
 }
 
@@ -13,21 +13,21 @@ export default (state = initialState, { type, payload }) => {
             console.log('product.reducer.js', type);
             state = {
                 ...state,
-                ...payload
+                loading: true
             }
             break;
         case productConstants.GET_ALL_PRODUCTS_SUCCESS:
             console.log('product.reducer.js', type);
             state = {
                 ...state,
-                ...payload
+                loading: false,
+                products: payload.products
             }
             break;
         case productConstants.GET_ALL_PRODUCTS_FAILURE:
             console.log('product.reducer.js', type);
             state = {
-                ...state,
-                ...payload
+                ...initialState
             }
             break;
         case productConstants.ADD_PRODUCT_REQUEST:
@@ -42,7 +42,7 @@ export default (state = initialState, { type, payload }) => {
             state = {
                 ...state,
                 loading: false,
-                product: payload
+                products: payload
             }
             break;
         case productConstants.ADD_PRODUCT_FAILURE:

@@ -10,6 +10,18 @@ const reorderCategories = (categories, category) => {
     console.log('categories', categories);
     console.log('category', category);
     let newCategories = [];
+    if (category.parentId === undefined) {
+        //If the new category is the top level, then the parentId will not exist. so adding with current categories.
+        return [
+            ...categories,
+            {
+                _id: category._id,
+                name: category.name,
+                slug: category.slug,
+                children: []
+            }
+        ]
+    }
 
     for (let cat of categories) {
         if (cat._id === category.parentId) {
@@ -24,12 +36,12 @@ const reorderCategories = (categories, category) => {
 
             newCategories.push({
                 ...cat,
-                children: cat.children && cat.children.length > 0 ? reorderCategories([...cat.children, newCat], category) : []
+                children: cat.children ? reorderCategories([...cat.children, newCat], category) : []
             })
         } else {
             newCategories.push({
                 ...cat,
-                children: cat.children && cat.children.length > 0 ? reorderCategories(cat.children, category) : []
+                children: cat.children ? reorderCategories(cat.children, category) : []
             })
         }
 

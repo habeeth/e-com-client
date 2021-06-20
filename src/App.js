@@ -8,7 +8,7 @@ import Home from "./containers/Home";
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isUserLoggedIn } from "./actions";
+import { getAllCategories, getInitialData, isUserLoggedIn } from "./actions";
 import Products from "./containers/Products/Index";
 import Orders from "./containers/Orders/Index";
 import Category from "./containers/Category/Index";
@@ -22,7 +22,9 @@ function App() {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn())
     }
-  }, [])
+    // dispatch(getAllCategories());//moving from categoty/Index to this file since the categories data should be available on Load of the application.
+    dispatch(getInitialData());
+  }, []);
 
   return (
     // <div className="App">

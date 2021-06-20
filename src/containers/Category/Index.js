@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, getAllCategories } from '../../actions';
 import Layout from '../../components/Layouts/Index'
 import Input from '../../components/UI/Input/Index';
+import Modal from '../../components/UI/Modal/Index';
 
 /**
 * @author
@@ -18,15 +19,15 @@ const Category = (props) => {
     const [categoryImage, setCategoryImage] = useState('');
     const [show, setShow] = useState(false);
 
-
-    useEffect(() => {
-        dispatch(getAllCategories())
-    }, [])
+    //moving to App.js since the category data to be present on load of the aplication.
+    // useEffect(() => {
+    //     dispatch(getAllCategories())
+    // }, [])
 
     const handleClose = () => {
         // console.log('categoryName', categoryName);
         // console.log('parentCategoryId', parentCategoryId);
-        if (categoryName != '' && parentCategoryId != '') {
+        if (categoryName != '') {//partntid not required for top level categories.
             const form = new FormData();
             // const newCategory = {
             //     categoryName,
@@ -37,6 +38,8 @@ const Category = (props) => {
             form.append('parentId', parentCategoryId);
             form.append('catPictures', categoryImage);
             dispatch(createCategory(form));
+            setCategoryName('');
+            setParentCategoryId('');
         }
 
         setShow(false);
@@ -102,37 +105,30 @@ const Category = (props) => {
                         </div>
                     </Col>
                 </Row>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header >
-                        <Modal.Title>Add Categories</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Input
-                            // type={}
-                            placeholder={"Category Name"}
-                            value={categoryName}
-                            onChange={e => setCategoryName(e.target.value)}
-                        />
-                        <select className='form-control' onChange={e => setParentCategoryId(e.target.value)}>
-                            <option>--- SELECT ---</option>
-                            {
-                                linearCategoriesList(category.categories).map(m =>
-                                    <option key={m.value} value={m.value} >{m.name}</option>
-                                )
-                            }
-                        </select>
+                <Modal show={show} handleClose={handleClose} title={'Add Categories'}>
+                    {/* changing for reusability */}
+                    <Input
+                        // type={}
+                        placeholder={"Category Name"}
+                        value={categoryName}
+                        onChange={e => setCategoryName(e.target.value)}
+                    />
+                    <select className='form-control' onChange={e => setParentCategoryId(e.target.value)}>
+                        <option>--- SELECT ---</option>
+                        {
+                            linearCategoriesList(category.categories).map(m =>
+                                <option key={m.value} value={m.value} >{m.name}</option>
+                            )
+                        }
+                    </select>
 
-                        <input className='form-control'
-                            type='file'
-                            name="categoryImage"
-                            onChange={handlecategoryImage}
-                        />
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant='warning' onClick={handleClose}>Save Changes</Button>
-                    </Modal.Footer>
+                    <input className='form-control'
+                        type='file'
+                        name="categoryImage"
+                        onChange={handlecategoryImage}
+                    />
                 </Modal>
+
             </Container>
         </Layout>
 
