@@ -39,7 +39,7 @@
         return (
             <Layout>
                 <Container>
-                    <Row style={{ marginTop: '50px' }}>
+                    <Row style={{ marginTop: '60px' }}>
                         <Col md={{ span: 4, offset: 6 }}>
                             <Form onSubmit={userLogin}>
                                 <Input

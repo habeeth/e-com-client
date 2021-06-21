@@ -37,7 +37,7 @@ const Signup = (props) => {
     return (
         <Layout>
             <Container>
-                <Row style={{ marginTop: '50px' }}>
+                <Row style={{ marginTop: '60px' }}>
                     <Col md={{ span: 6, offset: 6 }}>
                         <Form onSubmit={submit}>
                             <Row>
