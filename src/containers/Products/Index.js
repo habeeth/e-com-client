@@ -66,11 +66,11 @@ const Products = (props) => {
     }
     const handleProductPictures = (e) => {
         //array of images
-        console.log('handleProductPictures', productPicture);
         setProductPicture([
             ...productPicture,
             e.target.files[0]
-        ])
+        ]);
+        console.log('handleProductPictures', productPicture);
     }
     const renderProducts = () => {
         return (
@@ -90,7 +90,9 @@ const Products = (props) => {
                         product.products.length > 0 ?
                             product.products.map(i =>
                                 <tr onClick={() => handleShowProductDetailModal(i)} key={i._id}>
-                                    {/* getting infinite loop error if it is passed like this => onClick={handleShowProductDetailModal(i)} */}
+                                    {/* getting infinite loop error if it is passed like this => onClick={handleShowProductDetailModal(i)} 
+                                    https://stackoverflow.com/questions/59304283/error-too-many-re-renders-react-limits-the-number-of-renders-to-prevent-an-in
+                                    */}
                                     <td>#</td>
                                     <td>{i.name}</td>
                                     <td>{i.price}</td>
@@ -132,6 +134,7 @@ const Products = (props) => {
                     onChange={e => setDescription(e.target.value)}
                 />
                 {/* Categories in Linear Order */}
+                <label>Category</label>
                 <select
                     className='form-control'
                     value={categoryId}
@@ -159,13 +162,16 @@ const Products = (props) => {
                     }
                 </div>
                 {/* Product Picture */}
-                <input className='form-control'
-                    type='file'
-                    name="productPicture"
-                    onChange={handleProductPictures}
-                />
+                <div>
+                    <label>Select Pictures</label>
+                    <input className='form-control'
+                        type='file'
+                        name="productPicture"
+                        onChange={handleProductPictures}
+                    />
+                </div>
 
-            </Modal>
+            </Modal >
         );
     };
 
